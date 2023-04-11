@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace csharp_biblioteca
 {
-    internal class BookLending
+    internal class Lending
     {
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public User User { get; set; }
         public Document Document { get; set; }
 
-        public BookLending(User user, Document document)
+        public Lending(User user, Document document)
         {
             User = user;
             Document = document;
@@ -24,7 +24,13 @@ namespace csharp_biblioteca
 
             Console.WriteLine("Insert end date! (dd/mm/yyyy)");
 
-            StartTime = Console.ReadLine();
+            EndTime = Console.ReadLine();
+        }
+
+        public void PrintInfo()
+        {
+            Console.WriteLine("Here we go!\r\n");
+            Console.WriteLine($"Start Time: {StartTime}\r\nEnd Time: {EndTime}\r\nUser: {User.FirstName} {User.LastName}\r\nDocument: {Document.Code} {Document.Title}");
         }
     }
 }

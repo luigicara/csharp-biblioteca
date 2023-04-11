@@ -37,13 +37,37 @@
 
             var document = library.SearchDocument();
 
-            if (document == null)
+            while (document == null)
             {
-                Console.WriteLine("No documents found!");
-            } else
-            {
-                document.PrintInfo();
+                Console.WriteLine("No documents found! Please retry!");
+
+                document = library.SearchDocument();
             } 
+
+            document.PrintInfo();
+
+            Console.WriteLine("Do you wanna borrow the document? (y/n)");
+
+            string lendingChoice = Console.ReadLine();
+
+            while(lendingChoice != "y" && lendingChoice != "n")
+            {
+                Console.WriteLine("Input not valid!");
+
+                lendingChoice = Console.ReadLine();
+            }
+
+            if (lendingChoice == "y")
+            {
+                Lending lending = new(user, document);
+                library.AddLending(lending);
+
+                Console.WriteLine("Complete! You ordered the book!");
+
+                Lending result = library.SearchLendings();
+
+                result.PrintInfo();
+            }
         }
     }
 }

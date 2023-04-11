@@ -12,14 +12,14 @@ namespace csharp_biblioteca
         public string Name { get; set; }
         public List<User> Users { get; set; }
         public List<Document> Documents { get; set; }
-        public List<BookLending> BookLendings { get; set; }
+        public List<Lending> Lendings { get; set; }
 
         public Library(string name)
         {
             Name = name;
             Users = new List<User>();
             Documents = new List<Document>();
-            BookLendings = new List<BookLending>();
+            Lendings = new List<Lending>();
         }
 
         public void AddUser(User user)
@@ -37,9 +37,9 @@ namespace csharp_biblioteca
             Documents.Add(dvd);
         }
 
-        public void AddLending(BookLending bookLending)
+        public void AddLending(Lending lending)
         {
-            BookLendings.Add(bookLending);
+            Lendings.Add(lending);
         }
 
         public Document SearchDocument()
@@ -72,9 +72,9 @@ namespace csharp_biblioteca
 
         }
 
-        public BookLending SearchLendings()
+        public Lending SearchLendings()
         {
-            Console.WriteLine("Enter first name");
+            Console.WriteLine("\r\nSearch by your name!\r\nEnter first name");
 
             string firstName = Console.ReadLine();
 
@@ -83,7 +83,7 @@ namespace csharp_biblioteca
             string lastName = Console.ReadLine();
 
 
-            return BookLendings.Find(x => x.User.FirstName == firstName && x.User.LastName == lastName);
+            return Lendings.Find(x => x.User.FirstName == firstName && x.User.LastName == lastName);
         }
     }
 }
