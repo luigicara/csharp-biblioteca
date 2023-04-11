@@ -7,6 +7,9 @@
 
             Console.WriteLine("Hello user, please insert your credentials");
 
-            User user = new User();
+            //User user = new User();
+
+            Book book = new Book();
+        }
     }
 }
