@@ -23,5 +23,11 @@ namespace csharp_biblioteca
                 Console.WriteLine("Insert NUMBER");
             NumberOfPages = numberOfPages;
         }
+
+        public override void PrintInfo()
+        {
+            base.PrintInfo();
+            Console.WriteLine($"Number of pages: {NumberOfPages}");
+        }
     }
 }

@@ -57,5 +57,11 @@ namespace csharp_biblioteca
             Shelf = shelf;
             Author = author;
         }
+
+        public virtual void PrintInfo()
+        {
+            Console.WriteLine("Here we go!\r\n");
+            Console.WriteLine($"Code: {Code}\r\nTitle: {Title}\r\nYear: {Year}\r\nCategory: {Category}\r\nShelf: {Shelf}\r\nAuthor: {Author}");
+        }
     }
 }

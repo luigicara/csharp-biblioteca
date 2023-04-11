@@ -12,12 +12,18 @@ namespace csharp_biblioteca
 
         public Dvd() : base() 
         {
-            Console.WriteLine("Insert document's length!");
+            Console.WriteLine("Insert document's length in minutes!");
 
             int length;
             while (!int.TryParse(Console.ReadLine(), out length))
                 Console.WriteLine("Insert NUMBER");
             Length = length;
+        }
+
+        public override void PrintInfo()
+        {
+            base.PrintInfo();
+            Console.WriteLine($"Length: {Length}");
         }
     }
 }
