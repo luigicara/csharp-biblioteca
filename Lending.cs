@@ -32,5 +32,25 @@ namespace csharp_biblioteca
             Console.WriteLine("Here we go!\r\n");
             Console.WriteLine($"Start Time: {StartTime}\r\nEnd Time: {EndTime}\r\nUser: {User.FirstName} {User.LastName}\r\nDocument: {Document.Code} {Document.Title}");
         }
+
+
+        public static bool LendingChoice()
+        {
+            Console.WriteLine("Do you wanna borrow the document? (y/n)");
+
+            string lendingChoice = Console.ReadLine();
+
+            while (lendingChoice != "y" && lendingChoice != "n")
+            {
+                Console.WriteLine("Input not valid!");
+
+                lendingChoice = Console.ReadLine();
+            }
+
+            if (lendingChoice == "y")
+                return true;
+
+            return false;
+        }
     }
 }

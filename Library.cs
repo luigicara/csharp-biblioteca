@@ -40,6 +40,8 @@ namespace csharp_biblioteca
         public void AddLending(Lending lending)
         {
             Lendings.Add(lending);
+
+            Console.WriteLine("Complete! You ordered the book!");
         }
 
         public Document SearchDocument()
@@ -84,6 +86,32 @@ namespace csharp_biblioteca
 
 
             return Lendings.Find(x => x.User.FirstName == firstName && x.User.LastName == lastName);
+        }
+
+        public void AddChoice()
+        {
+            Console.WriteLine("Do you wanna add DVD or Book? (dvd/book)");
+
+            string choice = Console.ReadLine();
+
+            while (choice != "dvd" && choice != "book" && choice != null)
+            {
+                Console.WriteLine("Input not valid!");
+
+                choice = Console.ReadLine();
+            }
+
+            switch (choice)
+            {
+                case "book":
+                    Book book = new Book();
+                    this.AddBook(book);
+                    break;
+                default:
+                    Dvd dvd = new Dvd();
+                    this.AddDvd(dvd);
+                    break;
+            }
         }
     }
 }
