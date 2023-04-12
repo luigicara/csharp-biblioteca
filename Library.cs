@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace csharp_biblioteca
 {
@@ -44,48 +45,71 @@ namespace csharp_biblioteca
             Console.WriteLine("Complete! You ordered the book!");
         }
 
-        public Document SearchDocument()
+        public Document? SearchDocument()
         {
             Console.WriteLine("Do you want to search by code or title (code/title)");
 
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine() ?? string.Empty;
 
-            while (choice != "code" && choice != "title" && choice != null) { 
+            while (choice != "code" && choice != "title")
+            {
                 Console.WriteLine("Input not valid!");
 
-                choice = Console.ReadLine();    
+                choice = Console.ReadLine() ?? string.Empty;
             }
 
-            switch (choice)
+            Document result;
+
+            bool error = false;
+            
+            do
             {
-                case "title":
-                    Console.WriteLine("Enter Title");
+                if (error)
+                    Console.WriteLine("No documents found. Please, try again!");
 
-                    string title = Console.ReadLine();
+                Console.WriteLine($"Enter {choice}");
 
-                    return Documents.Find(x => x.Title == title);
-                default:
-                    Console.WriteLine("Enter Code");
+                string query = Console.ReadLine() ?? string.Empty;
 
-                    string code = Console.ReadLine();
+                if (choice == "code")
+                    result = Documents.Find(x => x.Code == query);
+                else
+                    result = Documents.Find(x => x.Title == query);
 
-                    return Documents.Find(x => x.Code == code);
-            }
+                error = true;
+            } while (result == null);
+            
+            return result; 
 
         }
 
         public Lending SearchLendings()
         {
-            Console.WriteLine("\r\nSearch by your name!\r\nEnter first name");
+            Lending result;
 
-            string firstName = Console.ReadLine();
+            bool error = false;
 
-            Console.WriteLine("Enter last name");
+            do
+            {
+                if (error)
+                    Console.WriteLine("No lendings found by this name. Please, try again!");
+                else
+                    Console.WriteLine("Search by your name!");
 
-            string lastName = Console.ReadLine();
+                Console.WriteLine("Enter first name");
 
+                string firstName = Console.ReadLine() ?? string.Empty;
 
-            return Lendings.Find(x => x.User.FirstName == firstName && x.User.LastName == lastName);
+                Console.WriteLine("Enter last name");
+
+                string lastName = Console.ReadLine() ?? string.Empty;
+
+                result = Lendings.Find(x => x.User.FirstName == firstName && x.User.LastName == lastName);
+
+                error = true;
+            } while (result == null);
+
+            return result;
         }
 
         public void AddChoice()
